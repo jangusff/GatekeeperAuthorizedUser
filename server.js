@@ -71,8 +71,9 @@ function gateKeeper(req, res, next) {
   
   var userPWHdr = req.get('x-username-and-password');
     
-  var {user, pw} = queryString.parse(userPWHdr);
-  
+  var {user, pw} = Object.assign(
+    {user: null, pass: null}, queryString.parse(userPWHdr));
+    
   //console.log(user);
  
   req.user = USERS.find((aUser) => {
